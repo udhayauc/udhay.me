@@ -1,0 +1,1604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Udhaya Chandran B | Full Stack .NET Developer</title>
+    <meta name="description" content="Senior Full Stack .NET Developer specializing in scalable enterprise applications, microservices architecture, and modern web technologies">
+    <meta name="keywords" content="Full Stack Developer, .NET Core, ASP.NET, ReactJS, Microservices, Azure, Software Engineer">
+    <link rel="canonical" href="https://udhayauc.github.io">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #00d4aa;
+            --secondary: #667eea;
+            --accent: #f093fb;
+            --dark: #0a0e27;
+            --darker: #050814;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a9c0;
+            --text-accent: #00d4aa;
+            --bg-primary: #0a0e27;
+            --bg-secondary: #1a1e35;
+            --bg-card: #151a2e;
+            --border: #2d3748;
+            --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --shadow-colored: 0 25px 50px -12px rgba(0, 212, 170, 0.25);
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Terminal Loading */
+        .terminal-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--darker);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            font-family: 'SF Mono', monospace;
+        }
+
+        .terminal-window {
+            background: var(--bg-card);
+            border-radius: 8px;
+            width: 400px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background: var(--bg-secondary);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot:nth-child(1) { background: #ff5f56; }
+        .dot:nth-child(2) { background: #ffbd2e; }
+        .dot:nth-child(3) { background: #27ca3f; }
+
+        .terminal-title {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-left: auto;
+        }
+
+        .terminal-body {
+            padding: 20px;
+            min-height: 200px;
+        }
+
+        .terminal-line {
+            margin-bottom: 8px;
+            opacity: 0;
+            animation: typewriter 0.5s forwards;
+        }
+
+        .terminal-prompt {
+            color: var(--primary);
+        }
+
+        .terminal-command {
+            color: var(--text-primary);
+        }
+
+        .terminal-output {
+            color: var(--text-secondary);
+            padding-left: 20px;
+        }
+
+        .cursor {
+            background: var(--primary);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes typewriter {
+            to { opacity: 1; }
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Matrix Rain Effect */
+        .matrix-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary);
+            font-family: 'SF Mono', monospace;
+        }
+
+        .logo::before {
+            content: '> ';
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::before {
+            content: '0' counter(nav-counter) '. ';
+            counter-increment: nav-counter;
+            color: var(--primary);
+            font-size: 12px;
+        }
+
+        .nav-links {
+            counter-reset: nav-counter;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-intro {
+            color: var(--primary);
+            font-size: 16px;
+            margin-bottom: 20px;
+            font-family: 'SF Mono', monospace;
+        }
+
+        .hero-title {
+            font-size: clamp(40px, 8vw, 80px);
+            font-weight: 600;
+            margin-bottom: 10px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(20px, 4vw, 40px);
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .hero-description {
+            max-width: 500px;
+            color: var(--text-secondary);
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 50px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            text-decoration: none;
+            font-family: 'SF Mono', monospace;
+            font-size: 14px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        .cta-button:hover {
+            color: var(--dark);
+        }
+
+        /* Code Editor Section */
+        .code-section {
+            padding: 100px 20px;
+            background: var(--bg-secondary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-number {
+            color: var(--primary);
+            font-family: 'SF Mono', monospace;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .code-editor {
+            background: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .editor-header {
+            background: var(--bg-secondary);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .editor-tabs {
+            display: flex;
+            gap: 10px;
+        }
+
+        .editor-tab {
+            padding: 6px 12px;
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            font-size: 12px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+
+        .editor-tab.active {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        .editor-body {
+            padding: 20px;
+            font-family: 'SF Mono', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+
+        .code-line {
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .line-number {
+            color: var(--text-secondary);
+            width: 30px;
+            text-align: right;
+            margin-right: 20px;
+            font-size: 12px;
+        }
+
+        .code-content {
+            flex: 1;
+        }
+
+        /* Syntax Highlighting */
+        .keyword { color: #c678dd; }
+        .string { color: #98c379; }
+        .comment { color: #5c6370; font-style: italic; }
+        .function { color: #61dafb; }
+        .number { color: #d19a66; }
+        .property { color: #e06c75; }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .skill-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 30px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-colored);
+        }
+
+        .skill-icon {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .skill-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .skill-tag {
+            padding: 4px 8px;
+            background: rgba(0, 212, 170, 0.1);
+            color: var(--primary);
+            font-size: 12px;
+            border-radius: 4px;
+            border: 1px solid rgba(0, 212, 170, 0.2);
+        }
+
+        /* Experience Timeline */
+        .experience-section {
+            padding: 100px 20px;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 30px;
+            width: 2px;
+            height: 100%;
+            background: var(--primary);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 50px;
+            padding-left: 80px;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 22px;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 4px solid var(--bg-primary);
+        }
+
+        .timeline-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 30px;
+            transition: var(--transition);
+        }
+
+        .timeline-content:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-colored);
+        }
+
+        .job-title {
+            color: var(--primary);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .company {
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .duration {
+            color: var(--text-accent);
+            font-family: 'SF Mono', monospace;
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+
+        .job-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .job-description ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .job-description li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+        }
+
+        .job-description li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        /* Projects Showcase */
+        .projects-section {
+            padding: 100px 20px;
+            background: var(--bg-secondary);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-colored);
+        }
+
+        .project-header {
+            padding: 30px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .project-title {
+            color: var(--primary);
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tech-tag {
+            padding: 4px 8px;
+            background: rgba(102, 126, 234, 0.1);
+            color: var(--secondary);
+            font-size: 12px;
+            border-radius: 4px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .project-links {
+            padding: 20px 30px;
+            background: rgba(0, 212, 170, 0.05);
+            display: flex;
+            gap: 15px;
+        }
+
+        .project-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+        }
+
+        .project-link:hover {
+            color: var(--primary);
+        }
+
+        /* Terminal Contact */
+        .contact-section {
+            padding: 100px 20px;
+        }
+
+        .terminal-contact {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .terminal-contact .terminal-header {
+            background: var(--bg-secondary);
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .terminal-contact .terminal-body {
+            padding: 30px;
+            font-family: 'SF Mono', monospace;
+        }
+
+        .contact-line {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-prompt {
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        .contact-command {
+            color: var(--text-secondary);
+            margin-right: 10px;
+        }
+
+        .contact-output {
+            color: var(--text-primary);
+        }
+
+        .contact-output a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .contact-output a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-title {
+                font-size: 40px;
+            }
+
+            .hero-subtitle {
+                font-size: 24px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 15px;
+            }
+
+            .timeline-item {
+                padding-left: 50px;
+            }
+
+            .timeline-marker {
+                left: 7px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.6s forwards;
+        }
+
+        .fade-in:nth-child(1) { animation-delay: 0.1s; }
+        .fade-in:nth-child(2) { animation-delay: 0.2s; }
+        .fade-in:nth-child(3) { animation-delay: 0.3s; }
+        .fade-in:nth-child(4) { animation-delay: 0.4s; }
+
+        /* Scroll Progress */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--gradient);
+            z-index: 9999;
+            transition: width 0.1s ease;
+        }
+
+        /* Code animation */
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        .typing-animation {
+            overflow: hidden;
+            border-right: 2px solid var(--primary);
+            white-space: nowrap;
+            animation: typing 3s steps(30, end), blink 0.75s step-end infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Terminal Loader -->
+    <div class="terminal-loader">
+        <div class="terminal-window">
+            <div class="terminal-header">
+                <div class="terminal-dots">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="terminal-title">portfolio.sh</div>
+            </div>
+            <div class="terminal-body">
+                <div class="terminal-line">
+                    <span class="terminal-prompt">➜</span>
+                    <span class="terminal-command">initializing portfolio...</span>
+                </div>
+                <div class="terminal-line" style="animation-delay: 0.5s;">
+                    <div class="terminal-output">✓ Loading developer profile</div>
+                </div>
+                <div class="terminal-line" style="animation-delay: 1s;">
+                    <div class="terminal-output">✓ Compiling projects</div>
+                </div>
+                <div class="terminal-line" style="animation-delay: 1.5s;">
+                    <div class="terminal-output">✓ Optimizing performance</div>
+                </div>
+                <div class="terminal-line" style="animation-delay: 2s;">
+                    <div class="terminal-output">✓ Ready to showcase skills</div>
+                </div>
+                <div class="terminal-line" style="animation-delay: 2.5s;">
+                    <span class="terminal-prompt">➜</span>
+                    <span class="terminal-command">launching in 3... 2... 1...</span>
+                    <span class="cursor">█</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Matrix Rain Canvas -->
+    <canvas class="matrix-rain"></canvas>
+
+    <!-- Scroll Progress -->
+    <div class="scroll-progress"></div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">udhaya_chandran</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-intro fade-in">Hi, my name is</div>
+            <h1 class="hero-title fade-in">Udhaya Chandran.</h1>
+            <h2 class="hero-subtitle fade-in">I build scalable digital solutions.</h2>
+            <p class="hero-description fade-in">
+                I'm a Full Stack .NET Engineer specializing in building exceptional enterprise applications, 
+                microservices architectures, and modern web experiences. Currently focused on creating 
+                robust HRMS platforms at <span style="color: var(--primary);">Rapiddata Technologies</span>.
+            </p>
+            <a href="#projects" class="cta-button fade-in">
+                checkout_my_work();
+            </a>
+        </div>
+    </section>
+
+    <!-- About/Code Section -->
+    <section id="about" class="code-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">01.</div>
+                <h2 class="section-title">About Me</h2>
+            </div>
+
+            <div class="code-editor">
+                <div class="editor-header">
+                    <div class="editor-tabs">
+                        <div class="editor-tab active">developer.cs</div>
+                        <div class="editor-tab">skills.json</div>
+                        <div class="editor-tab">experience.md</div>
+                    </div>
+                    <div style="color: var(--text-secondary); font-size: 12px;">3+ years experience</div>
+                </div>
+                <div class="editor-body">
+                    <div class="code-line">
+                        <span class="line-number">1</span>
+                        <div class="code-content">
+                            <span class="keyword">public class</span> <span class="function">FullStackDeveloper</span>
+                        </div>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">2</span>
+                        <div class="code-content">{</div>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">3</span>
+                        <div class="code-content">
+                            &nbsp;&nbsp;<span class="keyword">public string</span> <span class="property">Name</span> = <span class="string">"Udhaya Chandran B"</span>;
+                        </div>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">4</span>
+                        <div class="code-content">
+                            &nbsp;&nbsp;<span class="keyword">public string</span> <span class="property">Location</span> = <span class="string">"Chennai, India"</span>;
+                        </div>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">5</span>
+                        <div class="code-content">
+                            &nbsp;&nbsp;<span class="keyword">public int</span> <span class="property">YearsOfExperience</span> = <span class="number">3</span>;
+                        </div>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">6</span>
+                        <div class="code-content">&nbsp;</div>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">7</span>
+                        <div class="code-content">
+                            &nbsp;&nbsp;<span class="keyword">public List&lt;string&gt;</span> <span class="property">BackendTech</span> = <span class="keyword">new</span>()
+                        </div>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">8</span>
+                        <div class="code-content">
+                            &nbsp;&nbsp;{
+                        </div>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">9</span>
+                        <div class="code-content">
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"ASP.NET Core"</span>, <span class="string">"C#"</span>, <span class="string">"Web API"</span>, <span class="string">"Entity Framework"</span>,
+                        </div>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">10</span>
+                        <div class="code-content">
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Microservices"</span>, <span class="string">"Azure"</span>, <span class="string">"SQL Server"</span>
+                        </div>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">11</span>
+                        <div class="code-content">&nbsp;&nbsp;};</div>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">12</span>
+                        <div class="code-content">&nbsp;</div>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">13</span>
+                        <div class="code-content">
+                            &nbsp;&nbsp;<span class="keyword">public List&lt;string&gt;</span> <span class="property">FrontendTech</span> = <span class="keyword">new</span>()
+                        </div>
+                    </div>
+                                            <div class="code-line">
+                        <span class="line-number">14</span>
+                        <div class="code-content">
+                            &nbsp;&nbsp;{
+                        </div>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">15</span>
+                        <div class="code-content">
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"ReactJS"</span>, <span class="string">"Angular"</span>, <span class="string">"JavaScript"</span>, <span class="string">"TypeScript"</span>,
+                        </div>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">16</span>
+                        <div class="code-content">
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Material-UI"</span>, <span class="string">"Bootstrap"</span>
+                        </div>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">17</span>
+                        <div class="code-content">&nbsp;&nbsp;};</div>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">18</span>
+                        <div class="code-content">&nbsp;</div>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">19</span>
+                        <div class="code-content">
+                            &nbsp;&nbsp;<span class="comment">// Passionate about clean code and scalable architecture</span>
+                        </div>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">20</span>
+                        <div class="code-content">
+                            &nbsp;&nbsp;<span class="keyword">public void</span> <span class="function">BuildAmazingThings</span>() => 
+                        </div>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">21</span>
+                        <div class="code-content">
+                            &nbsp;&nbsp;&nbsp;&nbsp;<span class="function">Console</span>.<span class="function">WriteLine</span>(<span class="string">"Let's create something extraordinary!"</span>);
+                        </div>
+                    </div>
+                    <div class="code-line">
+                        <span class="line-number">22</span>
+                        <div class="code-content">}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skills-grid">
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">
+                        <i class="fab fa-microsoft"></i>
+                    </div>
+                    <h3 class="skill-title">Backend Engineering</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">ASP.NET Core</span>
+                        <span class="skill-tag">C#</span>
+                        <span class="skill-tag">Web API</span>
+                        <span class="skill-tag">Entity Framework</span>
+                        <span class="skill-tag">Microservices</span>
+                        <span class="skill-tag">JWT Auth</span>
+                        <span class="skill-tag">SOLID Principles</span>
+                    </div>
+                </div>
+
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">
+                        <i class="fab fa-react"></i>
+                    </div>
+                    <h3 class="skill-title">Frontend Development</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">ReactJS</span>
+                        <span class="skill-tag">Angular</span>
+                        <span class="skill-tag">TypeScript</span>
+                        <span class="skill-tag">JavaScript ES6+</span>
+                        <span class="skill-tag">Material-UI</span>
+                        <span class="skill-tag">Redux</span>
+                        <span class="skill-tag">Responsive Design</span>
+                    </div>
+                </div>
+
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="skill-title">Database & Cloud</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">SQL Server</span>
+                        <span class="skill-tag">T-SQL</span>
+                        <span class="skill-tag">Azure</span>
+                        <span class="skill-tag">Azure Functions</span>
+                        <span class="skill-tag">Database Design</span>
+                        <span class="skill-tag">Performance Tuning</span>
+                    </div>
+                </div>
+
+                <div class="skill-card fade-in">
+                    <div class="skill-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="skill-title">DevOps & Tools</h3>
+                    <div class="skill-list">
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Jenkins</span>
+                        <span class="skill-tag">Docker</span>
+                        <span class="skill-tag">CI/CD</span>
+                        <span class="skill-tag">Agile/Scrum</span>
+                        <span class="skill-tag">Code Review</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">02.</div>
+                <h2 class="section-title">Professional Experience</h2>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3 class="job-title">Software Engineer</h3>
+                        <div class="company">Rapiddata Technologies • Chennai</div>
+                        <div class="duration">March 2025 - Present</div>
+                        <div class="job-description">
+                            <ul>
+                                <li>Architected and developed comprehensive RapidHR platform modules including Payroll, Recruitment, and Performance Management systems</li>
+                                <li>Built high-performance RESTful APIs using ASP.NET Core serving 10,000+ concurrent users with 99.9% uptime</li>
+                                <li>Led migration of legacy Web Forms applications to modern ASP.NET Core MVC, improving performance by 40%</li>
+                                <li>Implemented JWT-based authentication and authorization systems with role-based access control</li>
+                                <li>Developed responsive React components with Material-UI, reducing user interaction time by 25%</li>
+                                <li>Collaborated in Agile development cycles with cross-functional teams of 12+ developers</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3 class="job-title">Application Engineer</h3>
+                        <div class="company">Cellarstone India Private Ltd • Chennai</div>
+                        <div class="duration">September 2022 - March 2025</div>
+                        <div class="job-description">
+                            <ul>
+                                <li>Developed enterprise-grade web applications using ASP.NET, C#, and .NET Core with SQL Server integration</li>
+                                <li>Created 50+ REST API endpoints for seamless third-party integrations and data synchronization</li>
+                                <li>Contributed to MaxBlox low-code platform, developing drag-and-drop components and custom widgets</li>
+                                <li>Optimized database queries and stored procedures, reducing response time by 60%</li>
+                                <li>Implemented automated CI/CD pipelines using Jenkins, reducing deployment time from 2 hours to 15 minutes</li>
+                                <li>Mentored 3 junior developers and conducted technical code review sessions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">03.</div>
+                <h2 class="section-title">Featured Projects</h2>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <h3 class="project-title">
+                            <i class="fas fa-users-cog"></i>
+                            RapidHR - Enterprise HRMS
+                        </h3>
+                        <p class="project-description">
+                            Comprehensive Human Resource Management System built with microservices architecture. 
+                            Features advanced modules for payroll processing, recruitment pipeline, leave management, 
+                            and performance analytics with real-time dashboards and automated reporting.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">ASP.NET Core</span>
+                            <span class="tech-tag">ReactJS</span>
+                            <span class="tech-tag">Material-UI</span>
+                            <span class="tech-tag">SQL Server</span>
+                            <span class="tech-tag">Azure</span>
+                            <span class="tech-tag">JWT</span>
+                            <span class="tech-tag">SignalR</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            Live Demo
+                        </a>
+                        <a href="#" class="project-link">
+                            <i class="fab fa-github"></i>
+                            Source Code
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <h3 class="project-title">
+                            <i class="fas fa-magic"></i>
+                            MaxBlox Low-Code Platform
+                        </h3>
+                        <p class="project-description">
+                            Revolutionary low-code development platform enabling rapid enterprise application development. 
+                            Features drag-and-drop UI builder, custom component library, workflow automation, 
+                            and seamless API integrations with third-party services.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">.NET Core</span>
+                            <span class="tech-tag">Angular</span>
+                            <span class="tech-tag">TypeScript</span>
+                            <span class="tech-tag">SQL Server</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">Redis</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            Platform
+                        </a>
+                        <a href="#" class="project-link">
+                            <i class="fas fa-file-alt"></i>
+                            Documentation
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <h3 class="project-title">
+                            <i class="fas fa-chart-line"></i>
+                            Real-Time Analytics Dashboard
+                        </h3>
+                        <p class="project-description">
+                            Advanced analytics dashboard for business intelligence with real-time data visualization, 
+                            interactive charts, custom report generation, and automated insights using machine learning algorithms.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">ASP.NET Core</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">D3.js</span>
+                            <span class="tech-tag">SignalR</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">Docker</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/udhayauc" class="project-link">
+                            <i class="fab fa-github"></i>
+                            GitHub
+                        </a>
+                        <a href="#" class="project-link">
+                            <i class="fas fa-play"></i>
+                            Demo
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <h3 class="project-title">
+                            <i class="fas fa-comments"></i>
+                            Scalable Chat Application
+                        </h3>
+                        <p class="project-description">
+                            High-performance chat application supporting 1000+ concurrent users with real-time messaging, 
+                            file sharing, group conversations, video calls, and end-to-end encryption for secure communication.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Socket.IO</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">WebRTC</span>
+                            <span class="tech-tag">AWS</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/udhayauc" class="project-link">
+                            <i class="fab fa-github"></i>
+                            GitHub
+                        </a>
+                        <a href="#" class="project-link">
+                            <i class="fas fa-external-link-alt"></i>
+                            Live App
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <h3 class="project-title">
+                            <i class="fas fa-shield-alt"></i>
+                            Cybersecurity Management System
+                        </h3>
+                        <p class="project-description">
+                            Enterprise security management platform with vulnerability scanning, threat detection, 
+                            compliance monitoring, and automated incident response workflows with detailed audit trails.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">C#</span>
+                            <span class="tech-tag">Blazor</span>
+                            <span class="tech-tag">Entity Framework</span>
+                            <span class="tech-tag">Azure Security</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">Kubernetes</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">
+                            <i class="fas fa-lock"></i>
+                            Private Repo
+                        </a>
+                        <a href="#" class="project-link">
+                            <i class="fas fa-file-pdf"></i>
+                            Case Study
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card fade-in">
+                    <div class="project-header">
+                        <h3 class="project-title">
+                            <i class="fas fa-robot"></i>
+                            AI-Powered Code Generator
+                        </h3>
+                        <p class="project-description">
+                            Intelligent code generation tool that creates boilerplate code, API endpoints, and database schemas 
+                            from natural language descriptions using GPT integration and custom ML models.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">FastAPI</span>
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">OpenAI API</span>
+                            <span class="tech-tag">TensorFlow</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/udhayauc" class="project-link">
+                            <i class="fab fa-github"></i>
+                            GitHub
+                        </a>
+                        <a href="#" class="project-link">
+                            <i class="fas fa-brain"></i>
+                            Try AI Tool
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-number">04.</div>
+                <h2 class="section-title">Get In Touch</h2>
+            </div>
+
+            <div class="terminal-contact">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                    <div class="terminal-title">contact.sh</div>
+                </div>
+                <div class="terminal-body">
+                    <div class="contact-line">
+                        <span class="contact-prompt">➜</span>
+                        <span class="contact-command">cat contact_info.json</span>
+                    </div>
+                    <div class="contact-line">
+                        <div class="contact-output">{</div>
+                    </div>
+                    <div class="contact-line">
+                        <div class="contact-output">
+                            &nbsp;&nbsp;"name": "Udhaya Chandran B",
+                        </div>
+                    </div>
+                    <div class="contact-line">
+                        <div class="contact-output">
+                            &nbsp;&nbsp;"role": "Full Stack .NET Developer",
+                        </div>
+                    </div>
+                    <div class="contact-line">
+                        <div class="contact-output">
+                            &nbsp;&nbsp;"email": "<a href="mailto:udhayachandran18062001@gmail.com">udhayachandran18062001@gmail.com</a>",
+                        </div>
+                    </div>
+                    <div class="contact-line">
+                        <div class="contact-output">
+                            &nbsp;&nbsp;"phone": "<a href="tel:+918870391161">+91 8870391161</a>",
+                        </div>
+                    </div>
+                    <div class="contact-line">
+                        <div class="contact-output">
+                            &nbsp;&nbsp;"location": "Chennai, Tamil Nadu, India",
+                        </div>
+                    </div>
+                    <div class="contact-line">
+                        <div class="contact-output">
+                            &nbsp;&nbsp;"linkedin": "<a href="https://linkedin.com/in/udhaya-chandran-27a060199" target="_blank">linkedin.com/in/udhaya-chandran-27a060199</a>",
+                        </div>
+                    </div>
+                    <div class="contact-line">
+                        <div class="contact-output">
+                            &nbsp;&nbsp;"github": "<a href="https://github.com/udhayauc" target="_blank">github.com/udhayauc</a>",
+                        </div>
+                    </div>
+                    <div class="contact-line">
+                        <div class="contact-output">
+                            &nbsp;&nbsp;"availability": "Available for opportunities",
+                        </div>
+                    </div>
+                    <div class="contact-line">
+                        <div class="contact-output">
+                            &nbsp;&nbsp;"interests": ["Enterprise Development", "Microservices", "Cloud Architecture"]
+                        </div>
+                    </div>
+                    <div class="contact-line">
+                        <div class="contact-output">}</div>
+                    </div>
+                    <div class="contact-line">
+                        <span class="contact-prompt">➜</span>
+                        <span class="contact-command">echo "Let's build something amazing together!" </span>
+                        <span class="cursor">█</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Terminal Loading Animation
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.querySelector('.terminal-loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.querySelector('.terminal-loader').style.display = 'none';
+                }, 500);
+            }, 3000);
+        });
+
+        // Matrix Rain Effect
+        const canvas = document.querySelector('.matrix-rain');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const matrix = "ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}";
+        const matrixArray = matrix.split("");
+
+        const fontSize = 10;
+        const columns = canvas.width / fontSize;
+
+        const drops = [];
+        for(let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(10, 14, 39, 0.04)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#00d4aa';
+            ctx.font = fontSize + 'px monospace';
+
+            for(let i = 0; i < drops.length; i++) {
+                const text = matrixArray[Math.floor(Math.random() * matrixArray.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                
+                if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 35);
+
+        // Resize canvas
+        window.addEventListener('resize', function() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Scroll Progress Bar
+        window.addEventListener('scroll', function() {
+            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (window.pageYOffset / totalHeight) * 100;
+            document.querySelector('.scroll-progress').style.width = progress + '%';
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header Hide/Show on Scroll
+        let lastScrollTop = 0;
+        const header = document.querySelector('header');
+        
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                header.style.transform = 'translateY(0)';
+            }
+            lastScrollTop = scrollTop;
+        });
+
+        // Intersection Observer for Animations
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Typing Effect for Hero
+        const heroTitle = document.querySelector('.hero-title');
+        const heroSubtitle = document.querySelector('.hero-subtitle');
+        
+        setTimeout(() => {
+            heroTitle.classList.add('typing-animation');
+        }, 500);
+
+        setTimeout(() => {
+            heroSubtitle.classList.add('typing-animation');
+        }, 1500);
+
+        // Interactive Project Cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-15px) rotateX(5deg)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) rotateX(0)';
+            });
+        });
+
+        // Skill Card Animations
+        document.querySelectorAll('.skill-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+                this.style.boxShadow = '0 25px 50px -12px rgba(0, 212, 170, 0.4)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.25)';
+            });
+        });
+
+        // Terminal Cursor Animation
+        setInterval(() => {
+            const cursors = document.querySelectorAll('.cursor');
+            cursors.forEach(cursor => {
+                cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
+            });
+        }, 500);
+
+        // Performance Monitoring
+        if ('performance' in window) {
+            window.addEventListener('load', function() {
+                setTimeout(() => {
+                    const perfData = performance.getEntriesByType('navigation')[0];
+                    console.log(`🚀 Portfolio loaded in ${Math.round(perfData.loadEventEnd - perfData.fetchStart)}ms`);
+                }, 0);
+            });
+        }
+
+        // Easter Egg: Konami Code
+        let konamiCode = [];
+        const konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+        
+        document.addEventListener('keydown', function(e) {
+            konamiCode.push(e.keyCode);
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode.shift();
+            }
+            
+            if (JSON.stringify(konamiCode) === JSON.stringify(konamiSequence)) {
+                document.body.style.filter = 'hue-rotate(180deg)';
+                setTimeout(() => {
+                    document.body.style.filter = 'none';
+                }, 3000);
+                console.log('🎮 Developer mode activated!');
+            }
+        });
+
+        // Code syntax highlighting simulation
+        document.querySelectorAll('.code-content').forEach(line => {
+            line.addEventListener('mouseenter', function() {
+                this.style.background = 'rgba(0, 212, 170, 0.1)';
+                this.style.borderRadius = '4px';
+                this.style.padding = '2px 4px';
+            });
+            
+            line.addEventListener('mouseleave', function() {
+                this.style.background = 'none';
+                this.style.padding = '0';
+            });
+        });
+    </script>
+</body>
+</html>
